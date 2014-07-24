@@ -4,5 +4,6 @@
     <string name="app_name">weingo</string>
     <string name="hello_world">Hello Hello Hello</string>
     <string name="action_settings">Settings</string>
-
-</resources>
+    <string name="tab1">1</string>
+    <string name="tab2">2</string>
+ </resources>
