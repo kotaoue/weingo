@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="before_bg">#40c4ff</color>
+    <color name="before_text">#006064</color>
+    <color name="after_bg">#ffd740</color>
+    <color name="after_text">#e65100</color>
+</resources>

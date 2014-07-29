@@ -8,7 +8,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,26 +19,141 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="48dp"
+                android:background="#ffffff">
             </TabWidget>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+            >
 
                 <LinearLayout
                     android:id="@+id/tab1"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                >
 
-                    <TextView
-                        android:id="@+id/textView1"
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/before_bg"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/textView"
+                                android:textColor="@color/before_text"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/textView1"
+                                android:textColor="@color/before_text"
+                                />
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:layout_weight="1"
+                                android:id="@+id/editTextBefore" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/unit"
+                                android:id="@+id/textViewBeforeUnit"
+                                android:textColor="@color/before_text"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/after_bg"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/textViewAfter"
+                                android:textColor="@color/after_text"
+                            />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/textView1After"
+                                android:textColor="@color/after_text"
+                            />
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:layout_weight="1"
+                                android:id="@+id/editTextAfter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/unit"
+                                android:id="@+id/textViewAfterUnit"
+                                android:textColor="@color/after_text"
+                            />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:text="New Button"
+                        android:id="@+id/button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tabページ１" />
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp" />
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/tab2"
@@ -45,7 +161,7 @@
                     android:layout_height="match_parent" >
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tabページ２" />
