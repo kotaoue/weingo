@@ -3,29 +3,25 @@
     package="me.oue.weingo.main"
     android:versionCode="1"
     android:versionName="1.0.0">
-   <!-- <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10"/>-->
+    <!-- <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10"/>-->
 
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
-        <!--<activity
-            android:name="me.oue.weingo.main.MainActivity"
-            android:label="@string/app_name" >-->
         <activity
-            android:name="me.oue.weingo.main.HelloTabWidget"
-            android:label="@string/app_name" >
+            android:name=".OuterFrameWidget"
+            android:label="@string/app_name">
 
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirstActivity"></activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".ThirdActivity"></activity>
+        <activity android:name=".RecordInputActivity"></activity>
+        <activity android:name=".RecordViewActivity"></activity>
     </application>
     <uses-sdk android:minSdkVersion="9" />
 
