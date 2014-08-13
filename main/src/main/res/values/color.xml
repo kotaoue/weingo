@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="main_bg">#ffffff</color>
+    <color name="sub_bg">#cfd8dc</color>
     <color name="before_bg">#40c4ff</color>
+    <color name="before_accent">#81d4fa</color>
     <color name="before_text">#006064</color>
     <color name="after_bg">#ffd740</color>
+    <color name="after_accent">#ffe082</color>
     <color name="after_text">#e65100</color>
 </resources>

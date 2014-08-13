@@ -7,7 +7,7 @@
 
 
     <LinearLayout
-        android:id="@+id/tab1"
+        android:id="@+id/tab_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -17,7 +17,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/before_bg"
+            android:background="@color/before_accent"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -64,9 +64,9 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/save_button_text" />
+                android:background="@drawable/before_button"
+                android:text="@string/save_button_text"
+                android:textColor="@color/before_text" />
 
         </LinearLayout>
 
@@ -74,7 +74,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/after_bg"
+            android:background="@color/after_accent"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -121,9 +121,9 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/save_button_text" />
+                android:background="@drawable/after_button"
+                android:text="@string/save_button_text"
+                android:textColor="@color/after_text" />
 
         </LinearLayout>
 
