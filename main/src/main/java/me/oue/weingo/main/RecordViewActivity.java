@@ -8,8 +8,6 @@ public class RecordViewActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TextView textview = new TextView(this);
-        textview.setText("This is the second tab");
-        setContentView(textview);
+        setContentView(R.layout.record_view);
     }
 }

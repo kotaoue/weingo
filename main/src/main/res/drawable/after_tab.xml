@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--選択されているとき-->
     <item android:state_selected="true">
-        <color android:color="@color/after_bg" />
+        <color android:color="@color/after_accent" />
     </item>
 
     <!--選択されていないとき-->
     <item android:state_selected="false">
-        <color android:color="@color/after_accent" />
+        <color android:color="@color/sub_bg" />
     </item>
 </selector>
