@@ -1,7 +1,11 @@
 package me.oue.weingo.main;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,14 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 public class RecordInputActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.v("RecordInputActivity", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_input);
 
         // ボタンの初期設定
         initButtonStatus();
+
+        // MySQLからのデータ読み出し
 
         // 予想的中率の計算
         calcResult();
@@ -64,6 +73,7 @@ public class RecordInputActivity extends Activity {
         EditText editTextBefore = (EditText) findViewById(R.id.editTextBefore);
         // 予想体重のテキストが入っているかをチェック。
         if (editTextBefore.getText().toString().length() > 0) {
+            // テキストが入っている場合。
             // ボタンを非表示にする。
             Button buttonBefore = (Button) findViewById(R.id.buttonBefore);
             buttonBefore.setVisibility(View.INVISIBLE);
@@ -72,6 +82,38 @@ public class RecordInputActivity extends Activity {
             editTextBefore.setFocusable(false);
             editTextBefore.setFocusableInTouchMode(false);
             editTextBefore.setEnabled(false);
+
+            // データの保存
+            /** エントリ追加 */
+            MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(getApplicationContext());
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            // 挿入するデータはContentValuesに格納
+            ContentValues val = new ContentValues();
+            val.put("name", "hoge");
+            val.put("age", 10);
+
+            // “name_book_table”に1件追加
+            db.insert("name_book_table", null, val);
+
+            String sql = "select * from name_book_table;";
+
+            try {
+                Cursor cursor = (SQLiteCursor) db.rawQuery(sql, null);
+
+                //TextViewに表示
+                StringBuilder text = new StringBuilder();
+
+                while (cursor.moveToNext()) {
+                    Log.v("SQLLite", cursor.getString(0) + "," + cursor.getString(1) + "," + cursor.getString(2));
+                    // Log.v("SQLLite", (string)cursor.getInt(1));
+                }
+
+            } catch (Exception e) {
+                Log.e("ERROR", e.toString());
+            } finally {
+                db.close();
+            }
         }
     }
 
@@ -82,6 +124,7 @@ public class RecordInputActivity extends Activity {
         EditText editTextAfter = (EditText) findViewById(R.id.editTextAfter);
         // 確定体重のテキストが入っているかをチェック。
         if (editTextAfter.getText().toString().length() > 0) {
+            // テキストが入っている場合。
             // ボタンを非表示にする。
             Button buttonAfter = (Button) findViewById(R.id.buttonAfter);
             buttonAfter.setVisibility(View.INVISIBLE);
@@ -111,11 +154,9 @@ public class RecordInputActivity extends Activity {
             Resources resources = getResources();
             if (result > 110f) {
                 textViewResultValue.setTextColor(resources.getColor(R.color.error));
-            }
-            else if(result > 105f){
+            } else if (result > 105f) {
                 textViewResultValue.setTextColor(resources.getColor(R.color.warning));
-            }
-            else if(result < 95f) {
+            } else if (result < 95f) {
                 textViewResultValue.setTextColor(resources.getColor(R.color.good));
             }
         }

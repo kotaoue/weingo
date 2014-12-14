@@ -5,10 +5,11 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.2.1" />
         <option name="modules">
           <set>
-            <option value="C:\Users\Kota\AndroidStudioProjects\weingo" />
-            <option value="C:\Users\Kota\AndroidStudioProjects\weingo\main" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/main" />
           </set>
         </option>
       </GradleProjectSettings>
