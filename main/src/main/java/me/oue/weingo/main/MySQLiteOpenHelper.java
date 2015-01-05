@@ -1,7 +1,8 @@
 package me.oue.weingo.main;
 
 /**
- * Created by Kota on 2014/08/19.
+ * MySQL Lite関連処理
+ * Created by kotaoue.
  */
 
 import android.content.Context;
@@ -13,7 +14,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     // コンストラクタ
     public MySQLiteOpenHelper(Context context) {
         // 任意のデータベースファイル名と、バージョンを指定する
-        super(context, "sample.db", null, 1);
+        super(context, "weingo.db", null, 1);
     }
 
 
@@ -25,10 +26,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // テーブルを作成。SQLの文法は通常のSQLiteと同様
         db.execSQL(
-                "create table name_book_table ("
-                        + "_id  integer primary key autoincrement not null, "
-                        + "name text not null, "
-                        + "age  integer )"
+                "create table weight_table ("
+                        + "date  integer primary key not null, "
+                        + "weight text not null, "
+                        + "forecast  integer )"
         );
         // 必要なら、ここで他のテーブルを作成したり、初期データを挿入したりする
     }

@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    productFlavors {
+        flavor1 {
+            applicationId = "me.oue.weingo"
+        }
+    }
 }
 
 dependencies {

@@ -1,5 +1,10 @@
 package me.oue.weingo.main;
 
+/**
+ * 体重入力ページ
+ * Created by kotaoue.
+ */
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.res.Resources;
@@ -42,6 +47,8 @@ public class RecordInputActivity extends Activity {
         // 確定体重のボタンの準備
         Button buttonAfter = (Button) findViewById(R.id.buttonAfter);
         buttonAfter.setOnClickListener(afterButtonClicked);
+
+        // MySQLにデータを保存する
     }
 
     /*
@@ -83,37 +90,8 @@ public class RecordInputActivity extends Activity {
             editTextBefore.setFocusableInTouchMode(false);
             editTextBefore.setEnabled(false);
 
-            // データの保存
-            /** エントリ追加 */
-            MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(getApplicationContext());
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            // 挿入するデータはContentValuesに格納
-            ContentValues val = new ContentValues();
-            val.put("name", "hoge");
-            val.put("age", 10);
-
-            // “name_book_table”に1件追加
-            db.insert("name_book_table", null, val);
-
-            String sql = "select * from name_book_table;";
-
-            try {
-                Cursor cursor = (SQLiteCursor) db.rawQuery(sql, null);
-
-                //TextViewに表示
-                StringBuilder text = new StringBuilder();
-
-                while (cursor.moveToNext()) {
-                    Log.v("SQLLite", cursor.getString(0) + "," + cursor.getString(1) + "," + cursor.getString(2));
-                    // Log.v("SQLLite", (string)cursor.getInt(1));
-                }
-
-            } catch (Exception e) {
-                Log.e("ERROR", e.toString());
-            } finally {
-                db.close();
-            }
+            // DBのデータを更新する
+            this.updateDB();
         }
     }
 
@@ -133,6 +111,9 @@ public class RecordInputActivity extends Activity {
             editTextAfter.setFocusable(false);
             editTextAfter.setFocusableInTouchMode(false);
             editTextAfter.setEnabled(false);
+
+            // DBのデータを更新する
+            this.updateDB();
         }
     }
 
@@ -160,5 +141,72 @@ public class RecordInputActivity extends Activity {
                 textViewResultValue.setTextColor(resources.getColor(R.color.good));
             }
         }
+    }
+
+    /*
+     DBからデータを取得。
+     */
+    private void getDataFromDB() {
+        MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            // データの読み込み
+
+            String sql = "select * from weight_table;";
+
+            Cursor cursor = (SQLiteCursor) db.rawQuery(sql, null);
+
+            //TextViewに表示
+            StringBuilder text = new StringBuilder();
+
+            while (cursor.moveToNext()) {
+                Log.v("SQLLite", cursor.getString(0) + "," + cursor.getString(1) + "," + cursor.getString(2));
+                // Log.v("SQLLite", (string)cursor.getInt(1));
+            }
+
+        } catch (Exception e) {
+            Log.e("ERROR", e.toString());
+        } finally {
+            db.close();
+        }
+    }
+
+    /*
+     DBのデータを更新
+     */
+    private void updateDB() {
+        MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            // データの保存
+            /** エントリ追加 */
+
+            // 挿入するデータはContentValuesに格納
+            ContentValues val = new ContentValues();
+            val.put("date", 20150101);
+            val.put("weight", 10);
+            val.put("forecast", 10);
+
+            // “name_book_table”に1件追加
+            db.replace("weight_table", null, val);
+
+            String sql = "select * from weight_table;";
+
+            Cursor cursor = (SQLiteCursor) db.rawQuery(sql, null);
+
+            //TextViewに表示
+            StringBuilder text = new StringBuilder();
+
+            while (cursor.moveToNext()) {
+                Log.v("SQLLite", cursor.getString(0) + "," + cursor.getString(1) + "," + cursor.getString(2));
+                // Log.v("SQLLite", (string)cursor.getInt(1));
+            }
+
+        } catch (Exception e) {
+            Log.e("ERROR", e.toString());
+        } finally {
+            db.close();
+        }
+
     }
 }

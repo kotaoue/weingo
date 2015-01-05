@@ -1,5 +1,10 @@
 package me.oue.weingo.main;
 
+/**
+ * グラフ表示ページ
+ * Created by kotaoue.
+ */
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;

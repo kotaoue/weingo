@@ -1,7 +1,8 @@
 package me.oue.weingo.main;
 
 /**
- * Created by Kota on 2014/08/04.
+ * メインページ
+ * Created by kotaoue.
  */
 
 import android.app.TabActivity;
