@@ -1,125 +1,90 @@
 # weingo
 
-体重記録・予想アプリ
+[![Vercel](https://img.shields.io/badge/vercel-deployed-brightgreen?logo=vercel)](https://weingo.vercel.app/)
 
-## 概要
+Weight tracking & prediction app
 
-weingo は、毎日の体重を記録・管理するアプリです。  
-その日の「予想体重」と「確定体重」を入力し、予想がどれだけ当たったか（予想的中率）を確認できます。
+## Overview
 
-**Web 版**（`web/`）は Android ブラウザでも使えるモバイルフレンドリーな Next.js アプリです。  
-Google Fitness API から実測体重を取得し、前回計測値からの差分で予想体重を入力・判定します。  
-Vercel へそのままデプロイできます。
+weingo is an app for recording and managing your daily weight.  
+Enter your "predicted weight" and "confirmed weight" for the day, and see how accurate your prediction was.
 
-## 機能（Android レガシー版）
+**Web version** (`web/`) is a mobile-friendly Next.js app.  
+It fetches your actual weight from the Google Fitness API and lets you enter a predicted weight based on the difference from your last measurement.  
+Ready to deploy on Vercel.
 
-- **体重を測る**（入力タブ）
-  - 今日の予想体重を入力・保存
-  - 今日の確定体重を入力・保存
-  - 予想体重と確定体重から予想的中率（%）を自動計算・表示
-  - 的中率に応じてテキストの色が変化（110% 超：エラー色、105% 超：警告色、95% 未満：良好色）
-- **グラフを見る**（グラフタブ）
-  - 記録した体重データをグラフで確認
+Try it live at **[https://weingo.vercel.app/](https://weingo.vercel.app/)** — no installation needed.
 
-## 機能（Web 版）
+## Features
 
-- Google アカウントでサインイン
-- Google Fitness API から最新の体重データを自動取得
-- 前回計測値からの差分（±kg）で予想体重を入力
-- 予想体重 vs 実測値の的中率を自動計算・カラー表示
-- 過去 30 日間の体重履歴を表示
-- Android ブラウザ対応のモバイルフレンドリー UI
-- Vercel へそのままデプロイ可能
+- Sign in with your Google account
+- Automatically fetch the latest weight data from the Google Fitness API
+- Enter a predicted weight as a delta (±kg) from the previous measurement
+- Automatically calculate and color-display prediction accuracy vs. actual weight
+- View weight history for the past 30 days
+- Mobile-friendly UI
+- Ready to deploy on Vercel
 
-## 技術スタック（Web 版）
+## Tech Stack
 
-| 項目 | 内容 |
-|------|------|
-| フレームワーク | Next.js 15 (App Router) |
-| 言語 | TypeScript |
-| スタイリング | Tailwind CSS |
-| 認証 | NextAuth.js (Google OAuth2) |
-| データソース | Google Fitness REST API |
-| デプロイ先 | Vercel |
+| Item | Details |
+|------|---------|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Auth | NextAuth.js (Google OAuth2) |
+| Data source | Google Fitness REST API |
+| Deployment | Vercel |
 
-## セットアップ手順
+## Setup
 
-#### 1. Google Cloud Console の設定
+#### 1. Google Cloud Console
 
-1. [Google Cloud Console](https://console.cloud.google.com/) でプロジェクトを作成
-2. **Fitness API** を有効化
-3. **OAuth 2.0 クライアント ID** を作成（アプリケーションの種類: ウェブ アプリケーション）
-4. 承認済みのリダイレクト URI に以下を追加:
-   - `http://localhost:3000/api/auth/callback/google`（ローカル開発）
-   - `https://your-app.vercel.app/api/auth/callback/google`（Vercel デプロイ）
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable the **Fitness API**
+3. Create an **OAuth 2.0 Client ID** (Application type: Web application)
+4. Add the following to the authorized redirect URIs:
+   - `http://localhost:3000/api/auth/callback/google` (local development)
+   - `https://your-app.vercel.app/api/auth/callback/google` (Vercel deployment)
 
-#### 2. ローカル開発
+#### 2. Local Development
 
 ```bash
 cd web
 cp .env.local.example .env.local
-# .env.local に GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET, NEXTAUTH_URL を設定
+# Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET, NEXTAUTH_URL in .env.local
 
 npm install
 npm run dev
 ```
 
-ブラウザで http://localhost:3000 を開く。
+Open http://localhost:3000 in your browser.
 
-#### 3. Vercel へのデプロイ
+#### 3. Deploy to Vercel
 
 ```bash
-# Vercel CLI を使用する場合
+# Using the Vercel CLI
 npm i -g vercel
 cd web
 vercel
 
-# または GitHub リポジトリを Vercel に連携してデプロイ
+# Or connect your GitHub repository to Vercel for automatic deployments
 ```
 
-Vercel の環境変数に以下を設定:
+Set the following environment variables in Vercel:
 
-| 変数名 | 説明 |
-|--------|------|
-| `GOOGLE_CLIENT_ID` | Google OAuth クライアント ID |
-| `GOOGLE_CLIENT_SECRET` | Google OAuth クライアントシークレット |
-| `NEXTAUTH_SECRET` | セッション暗号化キー（`openssl rand -base64 32` で生成） |
-| `NEXTAUTH_URL` | デプロイ先 URL（例: `https://your-app.vercel.app`） |
+| Variable | Description |
+|----------|-------------|
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `NEXTAUTH_SECRET` | Session encryption key (generate with `openssl rand -base64 32`) |
+| `NEXTAUTH_URL` | Deployment URL (e.g. `https://your-app.vercel.app`) |
 
-## Android アプリ（レガシー）
-
-| 項目 | 内容 |
-|------|------|
-| プラットフォーム | Android |
-| 言語 | Java |
-| ビルドツール | Gradle |
-| データベース | SQLite |
-| 最小 SDK バージョン | 9 (Android 2.3 Gingerbread) |
-| ターゲット SDK バージョン | 19 (Android 4.4 KitKat) |
-
-> **注意**: これはレガシープロジェクトであり、SDK バージョンが古くなっています。現在の Google Play Store の要件を満たすには、minSdkVersion 21 以上・targetSdkVersion 34 以上へのアップデートが必要です。
-
-### データベース (SQLite)
-
-`weingo.db` という SQLite データベースを使用し、以下のテーブルでデータを管理します。
-
-| カラム名 | 型 | 説明 |
-|----------|----|------|
-| date | INTEGER (PK) | 記録日（例: 20150101） |
-| weight | TEXT | 確定体重（文字列として保存） |
-| forecast | INTEGER | 予想体重 |
-
-### ビルド方法
-
-```bash
-./gradlew assembleDebug
-```
-
-### プロジェクト構成
+## Project Structure
 
 ```
 weingo/
-├── web/                    # Web アプリ（Next.js + Vercel）
+├── web/                    # Web app (Next.js + Vercel)
 │   ├── src/
 │   │   ├── app/            # Next.js App Router
 │   │   │   ├── api/auth/   # NextAuth.js (Google OAuth2)
@@ -127,23 +92,12 @@ weingo/
 │   │   │   ├── layout.tsx
 │   │   │   └── page.tsx
 │   │   ├── components/
-│   │   │   ├── WeightTracker.tsx  # 体重入力・判定画面
-│   │   │   └── SignIn.tsx         # サインイン画面
+│   │   │   ├── WeightTracker.tsx  # Weight input & prediction screen
+│   │   │   └── SignIn.tsx         # Sign-in screen
 │   │   └── lib/
-│   │       ├── authOptions.ts     # NextAuth 設定
-│   │       ├── fitness.ts         # Google Fitness API クライアント
-│   │       └── weight.ts          # 的中率計算ロジック
-│   ├── .env.local.example  # 環境変数のテンプレート
-│   └── vercel.json         # Vercel デプロイ設定
-├── main/                   # Android アプリ（レガシー）
-│   └── src/main/
-│       ├── java/me/oue/weingo/main/
-│       │   ├── MainActivity.java
-│       │   ├── RecordInputActivity.java
-│       │   ├── RecordViewActivity.java
-│       │   └── MySQLiteOpenHelper.java
-│       ├── res/
-│       └── AndroidManifest.xml
-├── build.gradle
-└── settings.gradle
+│   │       ├── authOptions.ts     # NextAuth config
+│   │       ├── fitness.ts         # Google Fitness API client
+│   │       └── weight.ts          # Prediction accuracy logic
+│   ├── .env.local.example  # Environment variable template
+│   └── vercel.json         # Vercel deployment config
 ```
